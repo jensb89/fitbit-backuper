@@ -40,22 +40,23 @@ const retrieveMissingData = function (dateFrom, callback) {
     return;
   }
 
-  const getDataIfMissing = function (addedDays) {
+  const getDataIfMissing = function (addedDays, count) {
     const dateToRetrieve = startingDate.clone().add(addedDays, 'days');
     dataAlreadyRetrieved(dateToRetrieve).then(function (exists) {
       if (exists) {
         console.log(`Data for ${dateToRetrieve.format('YYYY-MM-DD')} already exists`);
-        if (addedDays < daysBetween) return getDataIfMissing(addedDays + 1);
+        if (addedDays < daysBetween) return getDataIfMissing(addedDays + 1, count);
         return callback();
       }
 
       retrieveDataFor(dateToRetrieve, function () {
-        if (addedDays < daysBetween) return getDataIfMissing(addedDays + 1);
+        console.log('count: %d', count);
+        if ((addedDays < daysBetween) && (count < 3)  ) return getDataIfMissing(addedDays + 1, count + 1);
         return callback();
       });
     });
   };
-  getDataIfMissing(0);
+  getDataIfMissing(0, 0);
 };
 
 module.exports = function(dateFrom, callback) {

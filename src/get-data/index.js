@@ -22,8 +22,14 @@ module.exports = function (accessToken, dataDate, callback) {
     ['steps',         fitbitApi.get(`/1/user/-/activities/steps/date/${dataDate}/1d/1min.json`)],
     ['distance',      fitbitApi.get(`/1/user/-/activities/distance/date/${dataDate}/1d/1min.json`)],
     // // Not supported
-    // // ['floors',        fitbitApi.get(`/1/user/-/activities/floors/date/${dataDate}/1d/1min.json`)],
-    // // ['elevation',     fitbitApi.get(`/1/user/-/activities/elevation/date/${dataDate}/1d/1min.json`)],
+     ['floors',        fitbitApi.get(`/1/user/-/activities/floors/date/${dataDate}/1d/1min.json`)],
+     ['elevation',     fitbitApi.get(`/1/user/-/activities/elevation/date/${dataDate}/1d/1min.json`)],
+
+     // non intraday:
+     ['caloriesBMR',   fitbitApi.get(`/1/user/-/activities/caloriesBMR/date/${dataDate}/1m.json`)],
+     ['activitiesCalories',   fitbitApi.get(`/1/user/-/activities/activityCalories/date/${dataDate}/1m.json`)],
+     ['activities',  fitbitApi.get(`/1/user/-/activities/date/${dataDate}.json`)],
+     
 
     // // Body & Weight
     ['fat',           fitbitApi.get(`/1/user/-/body/fat/date/${dataDate}/1d.json`)],
